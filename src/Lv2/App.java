@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class App {
     static Scanner scan = new Scanner(System.in);
 
+    // 정수 입력 받음
     public static int inputNumber(String word) {
         int num;
         while (true) {
@@ -26,6 +27,26 @@ public class App {
             }
         }
         return num;
+    }
+
+    // 연산 결과 출력
+    public static void printResult(Calculator calculator) {
+        System.out.println("처음에 넣은 값 : " + calculator.getResult(0));
+        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
+
+        // 값 추가
+        System.out.println("1000 추가하기");
+        calculator.addResult(1000);
+
+        // 값 변경
+        System.out.println("1000을 -100으로 변경 ");
+        calculator.setResult(1000, -100);
+        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
+
+        // 값 제거
+        System.out.println("가장 먼저 저장된 데이터를 삭제하기");
+        calculator.removeResult(0);
+        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
     }
 
     public static void main(String[] args) {
@@ -71,22 +92,7 @@ public class App {
         }
         System.out.println("==================");
         // 연산 결과 출력
-        System.out.println("처음에 넣은 값 : " + calculator.getResult(0));
-        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
-
-        // 값 추가
-        System.out.println("1000 추가하기");
-        calculator.addResult(1000);
-
-        // 값 변경
-        System.out.println("1000을 -100으로 변경 ");
-        calculator.setResult(1000, -100);
-        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
-
-        // 값 제거
-        System.out.println("가장 먼저 저장된 데이터를 삭제하기");
-        calculator.removeResult(0);
-        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
+        printResult(calculator);
 
         System.out.println("=== 프로그램 종료 ===");
     }

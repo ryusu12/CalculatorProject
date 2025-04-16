@@ -69,6 +69,16 @@ public class App {
                 break;
             }
         }
+        System.out.println("==================");
+        System.out.println("전체 연산결과 : " + calculator.getResultList());
+
+        int first_result = calculator.getResult(0);
+        System.out.println("처음에 넣은 값 : " + first_result);
+
+        System.out.println(first_result+"을 -100으로 변경 ");
+        calculator.setResult(first_result, -100);
+        System.out.println("총 연산결과 : " + calculator.getResultList());
+
         System.out.println("=== 프로그램 종료 ===");
     }
 }

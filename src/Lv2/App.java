@@ -70,14 +70,23 @@ public class App {
             }
         }
         System.out.println("==================");
-        System.out.println("전체 연산결과 : " + calculator.getResultList());
+        // 연산 결과 출력
+        System.out.println("처음에 넣은 값 : " + calculator.getResult(0));
+        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
 
-        int first_result = calculator.getResult(0);
-        System.out.println("처음에 넣은 값 : " + first_result);
+        // 값 추가
+        System.out.println("1000 추가하기");
+        calculator.addResult(1000);
 
-        System.out.println(first_result+"을 -100으로 변경 ");
-        calculator.setResult(first_result, -100);
-        System.out.println("총 연산결과 : " + calculator.getResultList());
+        // 값 변경
+        System.out.println("1000을 -100으로 변경 ");
+        calculator.setResult(1000, -100);
+        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
+
+        // 값 제거
+        System.out.println("가장 먼저 저장된 데이터를 삭제하기");
+        calculator.removeResult(0);
+        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
 
         System.out.println("=== 프로그램 종료 ===");
     }

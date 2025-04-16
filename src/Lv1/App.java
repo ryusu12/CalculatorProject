@@ -3,7 +3,7 @@ package Lv1;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Main {
+public class App {
     static Scanner scan = new Scanner(System.in);
 
     public static int inputNumber(String word) {
@@ -15,7 +15,7 @@ public class Main {
                 num = scan.nextInt();
                 // 예외처리 : 양의 정수(0 포함)가 아니면 다시 입력받기
                 if( num < 0 ) {
-                    System.out.println("양의 정수 2개(0 포함)를 다시 입력하세요 ");
+                    System.out.println("양의 정수(0 포함)를 다시 입력하세요 ");
                 } else {
                     break;
                 }

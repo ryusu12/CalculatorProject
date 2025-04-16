@@ -1,44 +1,62 @@
 package Lv1;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+    static Scanner scan = new Scanner(System.in);
 
+    public static int inputNumber(String word) {
+        int num;
+        while (true) {
+            System.out.print(word +" 숫자를 입력하세요: ");
+            // 예외처리 : 정수가 아닌 값 예방
+            try {
+                num = scan.nextInt();
+                // 예외처리 : 양의 정수(0 포함)가 아니면 다시 입력받기
+                if( num < 0 ) {
+                    System.out.println("양의 정수 2개(0 포함)를 다시 입력하세요 ");
+                } else {
+                    break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("정수가 아닌 값을 입력했습니다.");
+            } finally {
+            scan.nextLine();
+            }
+        }
+        return num;
+    }
+
+    public static void main(String[] args) {
         System.out.println("=== 계산기 프로그램 ===");
         while(true) {
             // 1. 양의 정수를 입력받기
-            System.out.print("첫 번째 숫자를 입력하세요: ");
-            int num1 =  scan.nextInt();
-            System.out.print("두 번째 숫자를 입력하세요: ");
-            int num2 =  scan.nextInt();
-            scan.nextLine();
-
-            // 예외처리 : 양의 정수(0 포함)가 아니면 다시 입력받기
-            if( num1<0 || num2<0 ) {
-                System.out.println("양의 정수 2개(0 포함)를 다시 입력하세요 ");
-                continue;
-            }
+            int num1 = inputNumber("첫 번째");
+            int num2 = inputNumber("두 번째");
+            char operator;
 
             // 2. 사칙연산 기호를 입력받기
-            // 예외처리 : +,-,*,/ 가 아니면 다시 입력받기
-            System.out.print("사칙연산 기호를 입력하세요: ");
-            String userInput = scan.nextLine();
-            if(!userInput.equals("+") && !userInput.equals("-") && !userInput.equals("*") && !userInput.equals("/")) {
-                System.out.println("사칙연산 기호를 다시 입력하세요 (+,-,*,/)");
-                continue;
+            while (true) {
+                System.out.print("사칙연산 기호를 입력하세요: ");
+                String userInput = scan.nextLine();
+                // 예외처리 : +,-,*,/ 인지 확인
+                if(userInput.equals("+") || userInput.equals("-") || userInput.equals("*") || userInput.equals("/")) {
+                    operator = userInput.charAt(0);
+                    break;
+                } else {
+                    System.out.println("사칙연산 기호를 다시 입력하세요 (+,-,*,/)");
+                }
             }
-            char operator = userInput.charAt(0);
 
             // 3. 연산 진행
-            int result = 0;
+            int result;
             if (operator == '+') {
                 result = num1 + num2;
             } else if (operator == '-') {
                 result = num1 - num2;
             } else if (operator == '*') {
-                result = num1 - num2;
+                result = num1 * num2;
             } else {
                 // 예외처리 : 나눗셈에서 분모가 0이면 다시 입력받기
                 if(num2 == 0) {

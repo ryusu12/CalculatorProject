@@ -33,16 +33,17 @@ public class App {
     // 사칙연산 기호 입력 받음
     public static char inputOperator() {
         char operator;
+        loop:
         while (true) {
             System.out.print("사칙연산 기호를 입력하세요: ");
-            String userInput = scan.nextLine();
+            operator = scan.nextLine().charAt(0);
             // 예외처리 : +,-,*,/ 인지 확인
-            if(userInput.equals("+") || userInput.equals("-") || userInput.equals("*") || userInput.equals("/")) {
-                operator = userInput.charAt(0);
-                break;
-            } else {
-                System.out.println("사칙연산 기호를 다시 입력하세요 (+,-,*,/)");
+            for (OperatorType oper : OperatorType.values()) {
+                if (oper.getOperator() == operator) {
+                    break loop;
+                }
             }
+            System.out.println("사칙연산 기호를 다시 입력하세요 (+,-,*,/)");
         }
         return operator;
     }

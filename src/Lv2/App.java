@@ -35,12 +35,15 @@ public class App {
         System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
 
         // 값 추가
-        System.out.println("1000 추가하기");
-        calculator.addResult(1000);
+        System.out.println("새로운 값 추가하기");
+        int addNum = inputNumber("추가 할");
+        calculator.addResult(addNum);
+        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
 
         // 값 변경
-        System.out.println("1000을 -100으로 변경 ");
-        calculator.setResult(1000, -100);
+        System.out.println(addNum+"을 새로운 값으로 변경 ");
+        int setNum = inputNumber("변경 할");
+        calculator.setResult(addNum, setNum);
         System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
 
         // 값 제거

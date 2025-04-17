@@ -46,29 +46,6 @@ public class App {
         return operator;
     }
 
-    // 연산 결과 출력
-    public static void printResult(Calculator calculator) {
-        System.out.println("처음에 넣은 값 : " + calculator.getResult(0));
-        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
-
-        // 값 추가
-        System.out.println("새로운 값 추가하기");
-        int addNum = inputNumber("추가 할");
-        calculator.addResult(addNum);
-        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
-
-        // 값 변경
-        System.out.println(addNum+"을 새로운 값으로 변경 ");
-        int setNum = inputNumber("변경 할");
-        calculator.setResult(addNum, setNum);
-        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
-
-        // 값 제거
-        System.out.println("가장 먼저 저장된 데이터를 삭제하기");
-        calculator.removeResult(0);
-        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
-    }
-
     public static void main(String[] args) {
         // Calculator 인스턴스 생성
         Calculator calculator = new Calculator();
@@ -97,8 +74,27 @@ public class App {
             }
         }
         System.out.println("==================");
+
         // 연산 결과 출력
-        printResult(calculator);
+        System.out.println("처음에 넣은 값 : " + calculator.getResult(0));
+        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
+
+        // 값 추가
+        System.out.println("새로운 값 추가하기");
+        int addNum = inputNumber("추가 할");
+        calculator.addResult(addNum);
+        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
+
+        // 값 변경
+        System.out.println(addNum+"을 새로운 값으로 변경 ");
+        int setNum = inputNumber("변경 할");
+        calculator.setResult(addNum, setNum);
+        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
+
+        // 값 제거
+        System.out.println("가장 먼저 저장된 데이터를 삭제하기");
+        calculator.removeResult(0);
+        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
 
         System.out.println("=== 프로그램 종료 ===");
     }

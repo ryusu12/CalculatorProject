@@ -1,33 +1,28 @@
 package Lv3;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App {
     static Scanner scan = new Scanner(System.in);
-    static Calculator calculator = new Calculator();
+    static Calculator<Number> calculator = new Calculator<>();
 
-    // 정수 입력 받음
-    public static int inputNumber(String word) {
-        int num;
+    // 숫자 입력 받음
+    public static Number inputNumber(String word) {
         while (true) {
             System.out.print(word +" 숫자를 입력하세요: ");
-            // 예외처리 : 정수가 아닌 값 예방
+            String num = scan.nextLine();
+            // 정수, 실수 둘 다 받을 수 있음
             try {
-                num = scan.nextInt();
-                // 예외처리 : 양의 정수(0 포함)가 아니면 다시 입력받기
-                if( num < 0 ) {
-                    System.out.println("양의 정수(0 포함)를 다시 입력하세요 ");
+                if (num.contains(".")) {
+                    return Double.parseDouble(num);
                 } else {
-                    break;
+                    return Integer.parseInt(num);
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("양의 정수(0 포함)를 다시 입력하세요 ");
-            } finally {
-                scan.nextLine();
+            } catch (NumberFormatException e) {
+                // 예외처리 : 숫자가 아닌 값 예방
+                System.out.println("숫자를 다시 입력하세요 ");
             }
         }
-        return num;
     }
 
     // 사칙연산 기호 입력 받음
@@ -49,19 +44,19 @@ public class App {
     }
 
     // 연산 결과 출력
-    public static void printResult(Calculator calculator) {
+    public static void printResult(Calculator<Number> calculator) {
         System.out.println("처음에 넣은 값 : " + calculator.getResult(0));
         System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
 
         // 값 추가
         System.out.println("새로운 값 추가하기");
-        int addNum = inputNumber("추가 할");
+        Number addNum = inputNumber("추가 할");
         calculator.addResult(addNum);
         System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
 
         // 값 변경
         System.out.println(addNum+"을 새로운 값으로 변경 ");
-        int setNum = inputNumber("변경 할");
+        Number setNum = inputNumber("변경 할");
         calculator.setResult(addNum, setNum);
         System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
 
@@ -78,19 +73,19 @@ public class App {
 
         while(true) {
             // 1. 양의 정수를 입력받기
-            int num1 = inputNumber("첫 번째");
-            int num2 = inputNumber("두 번째");
+            Number num1 = inputNumber("첫 번째");
+            Number num2 = inputNumber("두 번째");
             // 2. 사칙연산 기호를 입력받기
             char operator = inputOperator();
 
             // 예외처리 : 나눗셈에서 분모가 0이면 다시 입력받기
-            if(num2==0 && operator=='/') {
+            if(num2.doubleValue() == 0.0 && operator=='/') {
                 System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
                 continue;
             }
 
             // 3. 연산 진행
-            int result =  arithmeticCalculator.calculate(num1, num2, operator);
+            Number result =  arithmeticCalculator.calculate(num1, num2, operator);
             calculator.addResult(result);
             System.out.println("결과: "+num1 + " " + operator + " " + num2 + " = "+ result);
 

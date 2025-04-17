@@ -22,12 +22,29 @@ public class App {
                     break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("정수가 아닌 값을 입력했습니다.");
+                System.out.println("양의 정수(0 포함)를 다시 입력하세요 ");
             } finally {
                 scan.nextLine();
             }
         }
         return num;
+    }
+
+    // 사칙연산 기호 입력 받음
+    public static char inputOperator() {
+        char operator;
+        while (true) {
+            System.out.print("사칙연산 기호를 입력하세요: ");
+            String userInput = scan.nextLine();
+            // 예외처리 : +,-,*,/ 인지 확인
+            if(userInput.equals("+") || userInput.equals("-") || userInput.equals("*") || userInput.equals("/")) {
+                operator = userInput.charAt(0);
+                break;
+            } else {
+                System.out.println("사칙연산 기호를 다시 입력하세요 (+,-,*,/)");
+            }
+        }
+        return operator;
     }
 
     // 연산 결과 출력
@@ -62,20 +79,8 @@ public class App {
             // 1. 양의 정수를 입력받기
             int num1 = inputNumber("첫 번째");
             int num2 = inputNumber("두 번째");
-            char operator;
-
             // 2. 사칙연산 기호를 입력받기
-            while (true) {
-                System.out.print("사칙연산 기호를 입력하세요: ");
-                String userInput = scan.nextLine();
-                // 예외처리 : +,-,*,/ 인지 확인
-                if(userInput.equals("+") || userInput.equals("-") || userInput.equals("*") || userInput.equals("/")) {
-                    operator = userInput.charAt(0);
-                    break;
-                } else {
-                    System.out.println("사칙연산 기호를 다시 입력하세요 (+,-,*,/)");
-                }
-            }
+            char operator = inputOperator();
 
             // 예외처리 : 나눗셈에서 분모가 0이면 다시 입력받기
             if(num2==0 && operator=='/') {
@@ -86,12 +91,11 @@ public class App {
             // 3. 연산 진행
             int result =  arithmeticCalculator.calculate(num1, num2, operator);
             calculator.addResult(result);
-            System.out.println("결과: " + result);
+            System.out.println("결과: "+num1 + " " + operator + " " + num2 + " = "+ result);
 
             // 4. “exit” 문자열을 입력하기 전까지 무한으로 계산을 진행합니다.
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
-            String command =  scan.nextLine();
-            if(command.equals("exit")) {
+            if(scan.nextLine().equals("exit")) {
                 break;
             }
         }

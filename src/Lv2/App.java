@@ -7,13 +7,15 @@ public class App {
     static Scanner scan = new Scanner(System.in);
 
     // 정수 입력 받음
-    public static int inputNumber(String word) {
+    public static int inputNumber(String word, boolean allowNegative) {
         int num;
         while (true) {
             System.out.print(word +" 숫자를 입력하세요: ");
             // 예외처리 : 정수가 아닌 값 예방
             try {
                 num = scan.nextInt();
+                // 추가 기능 수행 중에는 음의 정수도 포함
+                if ( allowNegative ) break;
                 // 예외처리 : 양의 정수(0 포함)가 아니면 다시 입력받기
                 if( num < 0 ) {
                     System.out.println("양의 정수(0 포함)를 다시 입력하세요 ");
@@ -50,10 +52,11 @@ public class App {
         // Calculator 인스턴스 생성
         Calculator calculator = new Calculator();
         System.out.println("=== 계산기 프로그램 ===");
+        loopExit:
         while(true) {
             // 1. 양의 정수를 입력받기
-            int num1 = inputNumber("첫 번째");
-            int num2 = inputNumber("두 번째");
+            int num1 = inputNumber("첫 번째", false);
+            int num2 = inputNumber("두 번째", false);
             // 2. 사칙연산 기호를 입력받기
             char operator = inputOperator();
 
@@ -65,37 +68,40 @@ public class App {
 
             // 3. 연산 진행
             int result =  calculator.calculate(num1, num2, operator);
-            System.out.println("결과: "+num1 + " " + operator + " " + num2 + " = "+ result);
+            System.out.println("\n결과: "+num1 + " " + operator + " " + num2 + " = "+ result);
+            System.out.println("연산결과 : " + calculator.getResultList());
 
+            loopContinue:
             // 4. “exit” 문자열을 입력하기 전까지 무한으로 계산을 진행합니다.
-            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
-            if(scan.nextLine().equals("exit")) {
-                break;
+            while (true) {
+                System.out.println("더 계산하시겠습니까? 아무거나 입력하세요");
+                System.out.println("추가 기능: (exit = 종료 / show = 결과 확인하기 / set = 결과 변경하기 / remove = 결과 삭제하기)");
+                String userInput = scan.nextLine();
+                switch (userInput) {
+                    case "exit" : {
+                        break loopExit;
+                    }
+                    case "show" : {
+                        System.out.println("연산결과 : " + calculator.getResultList() +"\n");
+                        break;
+                    }
+                    case "set" : {
+                        int changeNum = inputNumber("변경 할", true);
+                        int setNum = inputNumber("새로 들어갈", true);
+                        calculator.setResult(changeNum, setNum);
+                        System.out.println("연산결과 : " + calculator.getResultList() +"\n");
+                        break;
+                    }
+                    case "remove" : {
+                        int deleteNum = inputNumber("삭제 할", true);
+                        calculator.removeResult(deleteNum);
+                        System.out.println("연산결과 : " + calculator.getResultList() +"\n");
+                        break;
+                    }
+                    default: break loopContinue;
+                }
             }
         }
-        System.out.println("==================");
-
-        // 연산 결과 출력
-        System.out.println("처음에 넣은 값 : " + calculator.getResult(0));
-        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
-
-        // 값 추가
-        System.out.println("새로운 값 추가하기");
-        int addNum = inputNumber("추가 할");
-        calculator.addResult(addNum);
-        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
-
-        // 값 변경
-        System.out.println(addNum+"을 새로운 값으로 변경 ");
-        int setNum = inputNumber("변경 할");
-        calculator.setResult(addNum, setNum);
-        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
-
-        // 값 제거
-        System.out.println("가장 먼저 저장된 데이터를 삭제하기");
-        calculator.removeResult(0);
-        System.out.println("전체 연산결과 : " + calculator.getResultList() +"\n");
-
         System.out.println("=== 프로그램 종료 ===");
     }
 }

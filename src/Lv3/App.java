@@ -37,14 +37,14 @@ public class App {
             System.out.println("==================");
 
             // 4. “exit” 문자열을 입력하기 전까지 무한으로 계산을 진행합니다.
-            if (printLoop(calculator)) break;
+            if (showOptions(calculator)) break;
         }
         System.out.println("=== 프로그램 종료 ===");
     }
 
     // 연산 후 작업
     // 상황에 따라 값 확인, 추가, 변경, 제거를 진행합니다.
-    public static boolean printLoop(Calculator<Number> calculator) {
+    public static boolean showOptions(Calculator<Number> calculator) {
         while (true) {
             System.out.println("더 계산하시겠습니까? 아무거나 입력하세요");
             System.out.println("추가 기능: (exit = 종료 / show = 결과 확인하기 / set = 결과 변경하기 / remove = 결과 삭제하기)");

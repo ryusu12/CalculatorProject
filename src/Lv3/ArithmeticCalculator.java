@@ -11,6 +11,7 @@ public class ArithmeticCalculator {
         return operator.getOperation().applyAsDouble(a, b);
     }
 
+    // 저장된 연산 결과들 중, 입력받은 값보다 큰 결과값들을 출력하는 메서드
     public <T extends Number> void printHighResultList (Calculator<Number> calculator, T num) {
         List<Number> highResultList = calculator.getResultList()
                 .stream()

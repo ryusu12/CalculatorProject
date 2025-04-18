@@ -15,20 +15,20 @@ public class App {
             // 1. 피연산자와 사칙연산를 입력받습니다.
             Number num1 = checkInput.inputNumber("첫 번째");
             Number num2 = checkInput.inputNumber("두 번째");
-            char operator = checkInput.inputOperator();
+            OperatorType operator = checkInput.inputOperator();
 
             // 예외처리 : 나눗셈에서 분모가 0이면 처음부터 입력받습니다.
-            if(num2.doubleValue() == 0.0 && operator=='/') {
+            if(num2.doubleValue() == 0.0 && operator==OperatorType.DIVIDE) {
                 System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
                 continue;
             }
 
             // 2. 연산 진행
-            Number result =  arithmeticCalculator.calculate(num1, num2, operator);
+            Number result = arithmeticCalculator.calculate(num1, num2, operator);
             calculator.addResult(result);
 
             // 3. 연산 결과 출력
-            System.out.println("\n결과: "+num1 + " " + operator + " " + num2 + " = "+ result);
+            System.out.println("\n결과: "+num1 + " " + operator.getOperator() + " " + num2 + " = "+ result);
             System.out.println("연산결과 : " + calculator.getResultList());
 
             // 3.1. 저장된 연산 결과들 중, 입력받은 값보다 큰 결과값들을 출력

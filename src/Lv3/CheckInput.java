@@ -1,5 +1,6 @@
 package Lv3;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CheckInput {
@@ -25,20 +26,22 @@ public class CheckInput {
     }
 
     // 사칙연산 기호 입력
-    public char inputOperator() {
-        char operator;
-        loop:
+    public OperatorType inputOperator() {
         while (true) {
             System.out.print("사칙연산 기호를 입력하세요: ");
-            operator = scan.nextLine().charAt(0);
+            char operator = scan.nextLine().charAt(0);
+
             // 예외처리 : +,-,*,/ 인지 확인
-            for (OperatorType oper : OperatorType.values()) {
-                if (oper.getOperator() == operator) {
-                    break loop;
-                }
+            OperatorType operatorType = Arrays.stream(OperatorType.values())
+                    .filter(oper -> oper.getOperator() == operator)
+                    .findFirst()
+                    .orElse(null);
+
+            if (operatorType == null) {
+                System.out.println("사칙연산 기호를 다시 입력하세요 (+,-,*,/)");
+            } else {
+                return operatorType;
             }
-            System.out.println("사칙연산 기호를 다시 입력하세요 (+,-,*,/)");
         }
-        return operator;
     }
 }

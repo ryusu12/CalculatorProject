@@ -5,11 +5,9 @@ import java.util.Scanner;
 public class App {
     static Scanner scan = new Scanner(System.in);
     static CheckInput checkInput = new CheckInput();
-    static Calculator<Number> calculator = new Calculator<>();
+    static ArithmeticCalculator calculator = new ArithmeticCalculator();
 
     public static void main(String[] args) {
-        ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
-
         System.out.println("=== 계산기 프로그램 ===");
         while(true) {
             // 1. 피연산자와 사칙연산를 입력받습니다.
@@ -24,8 +22,7 @@ public class App {
             }
 
             // 2. 연산 진행
-            Number result = arithmeticCalculator.calculate(num1, num2, operator);
-            calculator.addResult(result);
+            Number result = calculator.calculate(num1, num2, operator);
 
             // 3. 연산 결과 출력
             System.out.println("\n결과: "+num1 + " " + operator.getOperator() + " " + num2 + " = "+ result);
@@ -33,18 +30,18 @@ public class App {
 
             // 3.1. 저장된 연산 결과들 중, 입력받은 값보다 큰 결과값들을 출력
             System.out.print("입력값보다 큰 결과값들 : " );
-            arithmeticCalculator.printHighResultList(calculator, result);
+            calculator.printHighResultList(result);
             System.out.println("==================");
 
             // 4. “exit” 문자열을 입력하기 전까지 무한으로 계산을 진행합니다.
-            if (showOptions(calculator)) break;
+            if (showOptions()) break;
         }
         System.out.println("=== 프로그램 종료 ===");
     }
 
     // 연산 후 작업
     // 상황에 따라 값 확인, 추가, 변경, 제거를 진행합니다.
-    public static boolean showOptions(Calculator<Number> calculator) {
+    public static boolean showOptions() {
         while (true) {
             System.out.println("더 계산하시겠습니까? 아무거나 입력하세요");
             System.out.println("추가 기능: (exit = 종료 / show = 결과 확인하기 / set = 결과 변경하기 / remove = 결과 삭제하기)");

@@ -43,8 +43,8 @@ public class App {
     // 상황에 따라 값 확인, 추가, 변경, 제거를 진행합니다.
     public static boolean showOptions() {
         while (true) {
-            System.out.println("더 계산하시겠습니까? 아무거나 입력하세요");
-            System.out.println("추가 기능: (exit = 종료 / show = 결과 확인하기 / set = 결과 변경하기 / remove = 결과 삭제하기)");
+            System.out.println("더 계산하시겠습니까? (exit: 종료 / 그 외: 계속 계산하기)" );
+            System.out.println("추가 기능: (show: 결과 확인하기 / set: 결과 변경하기 / remove: 결과 삭제하기 / first: 가장 먼저 저장된 결과 삭제하기)");
             String userInput = scan.nextLine();
             switch (userInput) {
                 case "exit" : {
@@ -64,6 +64,11 @@ public class App {
                 case "remove" : {
                     Number deleteNum = checkInput.inputNumber("삭제 할");
                     calculator.removeResult(deleteNum);
+                    System.out.println("연산결과 : " + calculator.getResultList() +"\n");
+                    break;
+                }
+                case "first" : {
+                    calculator.removeResultByIndex(0);
                     System.out.println("연산결과 : " + calculator.getResultList() +"\n");
                     break;
                 }

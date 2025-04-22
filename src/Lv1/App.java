@@ -21,7 +21,7 @@ public class App {
                     break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("양의 정수(0 포함)를 다시 입력하세요 ");
+                System.out.println("숫자를 다시 입력하세요 ");
             } finally {
                 scan.nextLine();
             }
@@ -80,7 +80,7 @@ public class App {
             System.out.println("결과: "+num1 + " " + operator + " " + num2 + " = "+ result);
 
             // 4. “exit” 문자열을 입력하기 전까지 무한으로 계산을 진행합니다.
-            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
+            System.out.println("더 계산하시겠습니까? (exit: 종료 / 그 외: 계속 계산하기)" );
             if(scan.nextLine().equals("exit")) {
                 break;
             }

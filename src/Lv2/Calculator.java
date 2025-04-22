@@ -51,4 +51,13 @@ public class Calculator {
             System.out.println("삭제할 값이 없습니다.");
         }
     }
+
+    // 특정 값 삭제 : index로 삭제
+    public void removeResultByIndex(int index) {
+        try {
+            resultList.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("삭제할 값이 없습니다.");
+        }
+    }
 }

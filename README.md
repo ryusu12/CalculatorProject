@@ -22,7 +22,7 @@
 4. `exit`를 입력하기 전까지 무한으로 계산을 진행된다.
     - 아무것도 입력 안 하면 계속 계산을 진행된다.
     - 추가 기능은 3가지다. 이를 수행하는 동안 계속 반복된다.
-    - `show`는 결과 확인하기, `set`는 결과 변경하기, `remove`는 결과 삭제하기 기능
+    - `show`는 결과 확인하기, `set`는 결과 변경하기, `remove`는 결과 삭제하기, `first`는 가장 먼저 저장된 결과 삭제하기 기능
 
 ### 요구사항
 - `Lv1`
@@ -30,12 +30,16 @@
     - `charAt(0)`을 사용하여 **사칙연산 기호**(+,-,*,/)를 입력받는다.
     - `if` or `switch`를 사용해서 **각 연산자에 맞는 연산**을 수행한다.
     - `exit` 를 입력받기 전까지 **반복적으로 계산기 기능을 수행**한다.
+
+
 - `Lv2`
     - `Calculator` 클래스를 생성해서, 사칙연산을 수행한 후, **결과값을 반환하는 메서드** 구현한다.
     - `Calculator` 클래스에서 **연산 결과를 저장하는 컬렉션 타입 필드**를 생성한다.
     - `App` 클래스의 `main` 메서드에 `Calculator` 클래스가 활용돼야 한다.
     - `Calculator` 클래스의 **캡슐화**로, **간접 접근**을 통해 값을 **가져오고, 수정하고, 삭제한다.**
       - 가장 먼저 저장된 데이터를 삭제하는 기능을 가진 메서드를 구현해야 한다.
+
+
 - `Lv3`
     - `Enum` 타입을 활용하여 **연산자 타입에 대한 정보를 관리**한다.
     - **`double` 타입의 값**을 전달 받아도 연산이 수행되도록 한다.
@@ -55,20 +59,23 @@
     - inputNumber : 숫자를 입력할 때까지 입력받고, `Number`형으로 반환한다.
     - inputOperator : `+,-,*,/` 일 때까지 입력받고, `OperatorType`형으로 반환한다.
 
+
 - **OperatorType** : 사칙연산 기호를 관리하는 Enum
     - getOperator : `char`형 기호를 반환한다.
     - getOperation : `DoubleBinaryOperator`형 연산식을 반환한다.
 
+
 - **ArithmeticCalculator** : 기본 계산기 클래스를 상속받아, 연산을 진행하는 클래스
     - calculate : 사칙연산을 진행한 뒤 `double`형으로 반환한다.
     - printHighResultList : 저장된 연산 결과들 중, 현재 입력값보다 큰 결과값들을 출력한다.
+
 
 - **Calculator** : 기본 계산기 클래스
     - getResultList : 연산 결과 리스트 `resultList`를 반환한다.
     - addResult : 결과값을 `resultList`에 저장한다.
     - setResult : `resultList`의 요소를 변경한다.
     - removeResult : `resultList`의 요소를 삭제한다.
-    - removeResultByIndex : `resultList`의 요소를 인덱스로 찾아서 삭제한다.
+    - removeFirstResult : `resultList`의 첫번째 요소를 삭제한다.
 ---
 ## 실행 화면
 클래스를 활용한 계산기 `Lv3`

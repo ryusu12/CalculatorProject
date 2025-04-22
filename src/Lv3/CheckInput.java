@@ -5,12 +5,11 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class CheckInput {
-    static Scanner scan = new Scanner(System.in);
-
     // 숫자 입력
     public BigDecimal inputNumber(String word) {
+        Scanner scan = new Scanner(System.in);
         while (true) {
-            System.out.print(word +" 숫자를 입력하세요: ");
+            System.out.print(word + " 숫자를 입력하세요: ");
             String num = scan.nextLine();
             // 정수, 실수 둘 다 받을 수 있음
             try {
@@ -24,6 +23,7 @@ public class CheckInput {
 
     // 사칙연산 기호 입력
     public OperatorType inputOperator() {
+        Scanner scan = new Scanner(System.in);
         while (true) {
             System.out.print("사칙연산 기호를 입력하세요: ");
             char operator = scan.nextLine().charAt(0);

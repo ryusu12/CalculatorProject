@@ -11,8 +11,8 @@ public class ArithmeticCalculator extends Calculator<BigDecimal> {
     }
 
     // 저장된 연산 결과들 중, 입력받은 값보다 큰 결과값들을 출력하는 메서드
-    public <T extends BigDecimal> void printHighResultList (T num) {
-        System.out.print("입력값보다 큰 결과값들 : " );
+    public <T extends BigDecimal> void printHighResultList(T num) {
+        System.out.print("입력값보다 큰 결과값들 : ");
         getResultList().stream()
                 .filter(result -> result.compareTo(num) > 0)
                 .forEach(result ->

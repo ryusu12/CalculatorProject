@@ -3,8 +3,8 @@ package Lv3;
 import java.math.MathContext;
 
 public enum OperatorType {
-    PLUS('+', (a, b) ->  a.add(b)),
-    MINUS('-', (a, b) ->  a.subtract(b)),
+    PLUS('+', (a, b) -> a.add(b)),
+    MINUS('-', (a, b) -> a.subtract(b)),
     MULTIPLY('*', (a, b) -> a.multiply(b)),
     DIVIDE('/', (a, b) -> a.divide(b, MathContext.DECIMAL32));
 

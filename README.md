@@ -8,6 +8,9 @@
 ## 개발 환경
 `Java` `temurin-17`
 
+### 사용기술
+`ArrayList` `extends` `Class` `Generic` `Enum` `stream` `Lambda` `BigDecimal`
+
 ## 주요 기능
 사칙연산 `(+,-,*,/)` 수행
 
@@ -46,8 +49,10 @@
     - **피연산자를 여러 타입으로** 받을 수 있도록 기능을 확장한다.
     - **Lambda & Stream**을 활용하여, 저장된 연산 결과들 중, **현재 입력값보다 큰 결과값들을 출력**하는 조회 메서드를 구현한다.
 
-## 구성
-![구성.png](readme/%EA%B5%AC%EC%84%B1.png)
+## 클래스 다이어그램
+
+![클래스다이어그램.png](readme/%ED%81%B4%EB%9E%98%EC%8A%A4%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8.png)
+
 ---
 **최종 계산기 : `Lv3`**
 - **App** : 계산기 프로그램을 실행하는 클래스
@@ -56,18 +61,22 @@
 
 
 - **CheckInput** : 피연산자와 사칙연산을 입력받는 클래스
-    - inputNumber : 숫자를 입력할 때까지 입력받고, `Number`형으로 반환한다.
+    - inputNumber : 숫자를 입력할 때까지 입력받고, `BigDecimal`형으로 반환한다.
     - inputOperator : `+,-,*,/` 일 때까지 입력받고, `OperatorType`형으로 반환한다.
 
 
 - **OperatorType** : 사칙연산 기호를 관리하는 Enum
     - getOperator : `char`형 기호를 반환한다.
-    - getOperation : `DoubleBinaryOperator`형 연산식을 반환한다.
+    - getOperation : `BigDecimalOperation`형 연산식을 반환한다.
+
+
+- **BigDecimalOperation** : `BigDecimal`연산이 가능하게 하는 함수형 인터페이스
 
 
 - **ArithmeticCalculator** : 기본 계산기 클래스를 상속받아, 연산을 진행하는 클래스
-    - calculate : 사칙연산을 진행한 뒤 `double`형으로 반환한다.
+    - calculate : 사칙연산을 진행한 뒤 `BigDecimal`형으로 반환한다.
     - printHighResultList : 저장된 연산 결과들 중, 현재 입력값보다 큰 결과값들을 출력한다.
+    - printResultList : 저장된 연산 결과들을 출력한다.
 
 
 - **Calculator** : 기본 계산기 클래스
@@ -86,30 +95,49 @@
 연산 결과와 입력값보다 큰 결과값들을 출력해주고, 더 계산할 것인지, 추가기능을 할건지 물어보고 상황에 맞춰 진행한다.
 
 #### 1. 덧셈
-![실행화면_문자_덧셈.png](readme/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4_%EB%AC%B8%EC%9E%90_%EB%8D%A7%EC%85%88.png)
+
+![실행화면1_덧셈.png](readme/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B41_%EB%8D%A7%EC%85%88.png)
 
 피연산자와 연산자가 올바르지 않으면 다시 입력받는다.
 
-`show` 를 입력하면 지금까지의 연산결과가 출력된다.<br>
-아무것도 입력안하면, 계속 연산이 진행된다.
+아무것도 입력하지 않으면, 계속 연산이 진행된다.
 
 #### 2. 뺄셈
-![실행화면_음수_뺄셈.png](readme/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4_%EC%9D%8C%EC%88%98_%EB%BA%84%EC%85%88.png)
 
-`set` 을 입력한 후, 변경할 숫자와 새로 들어갈 숫자를 입력하면, 연산결과에 값이 교체된 것을 확인할 수 있다.<br>
-이때, 결과에 없는 값을 입력하면 "변경할 값이 없습니다."라며 취소된다.
+![실행화면2_뺄셈.png](readme/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B42_%EB%BA%84%EC%85%88.png)
 
 #### 3. 곱셈
-![실행화면_곱셈.png](readme/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4_%EA%B3%B1%EC%85%88.png)
 
-`remove` 를 입력한 후, 삭제할 숫자를 입력하면 그 값이 연산결과에서 삭제된다. <br>
-이때, 결과에 없는 값을 입력하면 "삭제할 값이 없습니다."라며 취소된다.
+![실행화면3_곱셈.png](readme/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B43_%EA%B3%B1%EC%85%88.png)
 
 #### 4. 나눗셈
 
-![실행화면_분모_나눗셈.png](readme/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4_%EB%B6%84%EB%AA%A8_%EB%82%98%EB%88%97%EC%85%88.png)
+![실행화면4_나눗셈.png](readme/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B44_%EB%82%98%EB%88%97%EC%85%88.png)
 
 나눗셈 연산 과정에서, 두번째 숫자가 0이면 다시 두 숫자부터 입력받는다.
 
+
+### 추가 기능
+
+![실행화면_show.png](readme/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4_show.png)
+
+`show` 를 입력하면 지금까지의 연산결과가 출력된다.<br>
+
+![실행화면_set.png](readme/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4_set.png)
+
+`set` 을 입력한 후, 변경할 숫자와 새로 들어갈 숫자를 입력하면, 연산결과에 값이 교체된 것을 확인할 수 있다.<br>
+이때, 결과에 없는 값을 바꾸려고 하면 "변경할 값이 없습니다."라며 취소된다.
+
+![실행화면_remove.png](readme/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4_remove.png)
+
+`remove` 를 입력한 후, 삭제할 숫자를 입력하면 그 값이 연산결과에서 삭제된다. <br>
+이때, 결과에 없는 값을 삭제하려고 하면 "삭제할 값이 없습니다."라며 취소된다.
+
+![실행화면_first.png](readme/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4_first.png)
+
 `first` 를 입력하면, 저장되어있던 연산결과 중, 가장 먼저 저장된 결과를 삭제한다. <br>
 만약, 저장되어있는 연산 결과가 없으면 "삭제할 값이 없습니다."라며 취소된다.
+
+![실행화면_exit.png](readme/%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4_exit.png)
+
+`exit` 를 입력하면, 프로그램이 종료된다.

@@ -68,7 +68,7 @@ public class App {
                     break;
                 }
                 case "first" : {
-                    calculator.removeResultByIndex(0);
+                    calculator.removeFirstResult();
                     System.out.println("연산결과 : " + calculator.getResultList() +"\n");
                     break;
                 }

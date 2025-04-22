@@ -52,10 +52,10 @@ public class Calculator {
         }
     }
 
-    // 특정 값 삭제 : index로 삭제
-    public void removeResultByIndex(int index) {
+    // 가장 먼저 저장된 데이터 삭제
+    public void removeFirstResult() {
         try {
-            resultList.remove(index);
+            resultList.remove(0);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("삭제할 값이 없습니다.");
         }

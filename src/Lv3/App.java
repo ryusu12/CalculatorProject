@@ -1,5 +1,6 @@
 package Lv3;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class App {
@@ -11,25 +12,24 @@ public class App {
         System.out.println("=== 계산기 프로그램 ===");
         while(true) {
             // 1. 피연산자와 사칙연산를 입력받습니다.
-            Number num1 = checkInput.inputNumber("첫 번째");
-            Number num2 = checkInput.inputNumber("두 번째");
+            BigDecimal num1 = checkInput.inputNumber("첫 번째");
+            BigDecimal num2 = checkInput.inputNumber("두 번째");
             OperatorType operator = checkInput.inputOperator();
 
             // 예외처리 : 나눗셈에서 분모가 0이면 처음부터 입력받습니다.
-            if(num2.doubleValue() == 0.0 && operator==OperatorType.DIVIDE) {
+            if(num2.compareTo(BigDecimal.ZERO) == 0 && operator==OperatorType.DIVIDE) {
                 System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
                 continue;
             }
 
             // 2. 연산 진행
-            Number result = calculator.calculate(num1, num2, operator);
+            BigDecimal result = calculator.calculate(num1, num2, operator);
 
             // 3. 연산 결과 출력
-            System.out.println("\n결과: "+num1 + " " + operator.getOperator() + " " + num2 + " = "+ result);
-            System.out.println("연산결과 : " + calculator.getResultList());
+            System.out.println("\n결과: "+num1.toPlainString() + " " + operator.getOperator() + " " + num2.toPlainString() + " = "+ result.toPlainString());
+            calculator.printResultList();
 
             // 3.1. 저장된 연산 결과들 중, 입력받은 값보다 큰 결과값들을 출력
-            System.out.print("입력값보다 큰 결과값들 : " );
             calculator.printHighResultList(result);
             System.out.println("==================");
 
@@ -51,25 +51,25 @@ public class App {
                     return true;
                 }
                 case "show" : {
-                    System.out.println("연산결과 : " + calculator.getResultList() +"\n");
+                    calculator.printResultList();
                     break;
                 }
                 case "set" : {
-                    Number changeNum = checkInput.inputNumber("변경 할");
-                    Number setNum = checkInput.inputNumber("새로 들어갈");
+                    BigDecimal changeNum = checkInput.inputNumber("변경 할");
+                    BigDecimal setNum = checkInput.inputNumber("새로 들어갈");
                     calculator.setResult(changeNum, setNum);
-                    System.out.println("연산결과 : " + calculator.getResultList() +"\n");
+                    calculator.printResultList();
                     break;
                 }
                 case "remove" : {
-                    Number deleteNum = checkInput.inputNumber("삭제 할");
+                    BigDecimal deleteNum = checkInput.inputNumber("삭제 할");
                     calculator.removeResult(deleteNum);
-                    System.out.println("연산결과 : " + calculator.getResultList() +"\n");
+                    calculator.printResultList();
                     break;
                 }
                 case "first" : {
                     calculator.removeFirstResult();
-                    System.out.println("연산결과 : " + calculator.getResultList() +"\n");
+                    calculator.printResultList();
                     break;
                 }
                 default: return false;

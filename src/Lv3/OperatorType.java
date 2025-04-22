@@ -1,17 +1,17 @@
 package Lv3;
 
-import java.util.function.DoubleBinaryOperator;
+import java.math.MathContext;
 
 public enum OperatorType {
-    PLUS('+', (a, b) -> a + b),
-    MINUS('-', (a, b) -> a - b),
-    MULTIPLY('*', (a, b) -> a * b),
-    DIVIDE('/', (a, b) -> a / b);
+    PLUS('+', (a, b) ->  a.add(b)),
+    MINUS('-', (a, b) ->  a.subtract(b)),
+    MULTIPLY('*', (a, b) -> a.multiply(b)),
+    DIVIDE('/', (a, b) -> a.divide(b, MathContext.DECIMAL32));
 
     private final char operator;
-    private final DoubleBinaryOperator operation;
+    private final BigDecimalOperation operation;
 
-    OperatorType(char operator, DoubleBinaryOperator operation) {
+    OperatorType(char operator, BigDecimalOperation operation) {
         this.operator = operator;
         this.operation = operation;
     }
@@ -22,7 +22,7 @@ public enum OperatorType {
     }
 
     // 연산식 가져오기
-    public DoubleBinaryOperator getOperation() {
+    public BigDecimalOperation getOperation() {
         return operation;
     }
 }

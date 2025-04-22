@@ -1,9 +1,10 @@
 package Lv3;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Calculator <T extends Number>{
+public class Calculator <T extends BigDecimal>{
     // 연산 결과를 저장하는 컬렉션 - ArrayList
     private final List<T> resultList = new ArrayList<>();
 

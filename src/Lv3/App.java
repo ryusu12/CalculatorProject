@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         App app = new App();
+        ArithmeticCalculator calculator = new ArithmeticCalculator();
 
         System.out.println("=== 계산기 프로그램 ===");
         while (true) {
@@ -22,7 +23,6 @@ public class App {
             }
 
             // 2. 연산 진행
-            ArithmeticCalculator calculator = new ArithmeticCalculator();
             BigDecimal result = calculator.calculate(num1, num2, operator);
 
             // 3. 연산 결과 출력
@@ -34,15 +34,14 @@ public class App {
             System.out.println("==================");
 
             // 4. “exit” 문자열을 입력하기 전까지 무한으로 계산을 진행합니다.
-            if (app.showOptions()) break;
+            if (app.showOptions(calculator)) break;
         }
         System.out.println("=== 프로그램 종료 ===");
     }
 
     // 연산 후 작업
     // 상황에 따라 값 확인, 추가, 변경, 제거를 진행합니다.
-    private boolean showOptions() {
-        ArithmeticCalculator calculator = new ArithmeticCalculator();
+    private boolean showOptions(ArithmeticCalculator calculator) {
         CheckInput checkInput = new CheckInput();
         while (true) {
             Scanner scan = new Scanner(System.in);
